@@ -37,7 +37,7 @@ Follow these steps in order. Complete each step before moving to the next.
 
 Ask the user for the following (or extract from their message):
 
-1. **Resource name** — The domain entity name (Portuguese, plural for the controller route, e.g., "funcionarios", "empresas", "cobrancas")
+1. **Resource name** — The domain entity name (plural for the controller route, e.g., "employees", "companies", "invoices")
 2. **Entity properties** — Name, type, and description of each property
 3. **Operations needed** — Which CRUD operations: GET all (with pagination), GET by ID, POST, PUT, DELETE
 4. **Any special business rules** — Filters, validation, computed fields
@@ -524,18 +524,18 @@ Present the final results **directly in the chat window**:
 
 | Layer | File Pattern | Example |
 |-------|-------------|--------|
-| Response DTO | `DTOs/{Feature}/{Name}Dto.cs` | `DTOs/Funcionarios/FuncionarioDto.cs` |
-| Query DTO | `DTOs/{Feature}/{Name}Query.cs` | `DTOs/Funcionarios/FuncionarioQuery.cs` |
-| Create DTO | `DTOs/{Feature}/Create{Name}Dto.cs` | `DTOs/Funcionarios/CreateFuncionarioDto.cs` |
-| Domain Entity | `Domain/{Name}.cs` | `Domain/Funcionario.cs` |
-| Repository Interface | `Repositories/I{Name}Repository.cs` | `Repositories/IFuncionarioRepository.cs` |
-| Repository Impl | `Repositories/{Name}Repository.cs` | `Repositories/FuncionarioRepository.cs` |
-| Service Interface | `Services/I{Name}Service.cs` | `Services/IFuncionarioService.cs` |
-| Service Impl | `Services/{Name}Service.cs` | `Services/FuncionarioService.cs` |
-| Controller | `Controllers/{NamePlural}Controller.cs` | `Controllers/FuncionariosController.cs` |
-| Controller Tests | `Tests/Controllers/{NamePlural}ControllerTests.cs` | `Tests/Controllers/FuncionariosControllerTests.cs` |
-| Service Tests | `Tests/Services/{Name}ServiceTests.cs` | `Tests/Services/FuncionarioServiceTests.cs` |
-| Repository Tests | `Tests/Repositories/{Name}RepositoryTests.cs` | `Tests/Repositories/FuncionarioRepositoryTests.cs` |
+| Response DTO | `DTOs/{Feature}/{Name}Dto.cs` | `DTOs/Employees/EmployeeDto.cs` |
+| Query DTO | `DTOs/{Feature}/{Name}Query.cs` | `DTOs/Employees/EmployeeQuery.cs` |
+| Create DTO | `DTOs/{Feature}/Create{Name}Dto.cs` | `DTOs/Employees/CreateEmployeeDto.cs` |
+| Domain Entity | `Domain/{Name}.cs` | `Domain/Employee.cs` |
+| Repository Interface | `Repositories/I{Name}Repository.cs` | `Repositories/IEmployeeRepository.cs` |
+| Repository Impl | `Repositories/{Name}Repository.cs` | `Repositories/EmployeeRepository.cs` |
+| Service Interface | `Services/I{Name}Service.cs` | `Services/IEmployeeService.cs` |
+| Service Impl | `Services/{Name}Service.cs` | `Services/EmployeeService.cs` |
+| Controller | `Controllers/{NamePlural}Controller.cs` | `Controllers/EmployeesController.cs` |
+| Controller Tests | `Tests/Controllers/{NamePlural}ControllerTests.cs` | `Tests/Controllers/EmployeesControllerTests.cs` |
+| Service Tests | `Tests/Services/{Name}ServiceTests.cs` | `Tests/Services/EmployeeServiceTests.cs` |
+| Repository Tests | `Tests/Repositories/{Name}RepositoryTests.cs` | `Tests/Repositories/EmployeeRepositoryTests.cs` |
 
 ## Standards Quick Reference
 
@@ -552,7 +552,7 @@ Present the final results **directly in the chat window**:
 ### Route Rules
 - ✅ `v1/[controller]` — correct
 - ❌ `api/v1/[controller]` — wrong
-- Resource names: Portuguese, plural, lowercase
+- Resource names: plural, lowercase
 - No verbs in URL paths
 - No trailing slashes
 

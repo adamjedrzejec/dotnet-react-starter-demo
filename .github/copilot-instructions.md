@@ -18,7 +18,7 @@ This document defines the coding standards, patterns, and conventions for this f
 ### 1.1 Route Conventions
 
 - **Base path:** `/v1/[resource]` — NO `/api/` prefix
-- **Resource naming:** Portuguese, plural, lowercase (e.g., `/v1/empresas`, `/v1/funcionarios`, `/v1/cobrancas`)
+- **Resource naming:** plural, lowercase (e.g., `/v1/companies`, `/v1/employees`, `/v1/invoices`)
 - **Controller attribute:** `[Route("v1/[controller]")]`
 - **No trailing slashes** on any endpoint
 
@@ -26,7 +26,7 @@ This document defines the coding standards, patterns, and conventions for this f
 ```csharp
 [Route("v1/[controller]")]
 [ApiController]
-public class EmpresasController : ControllerBase
+public class CompaniesController : ControllerBase
 ```
 
 **Wrong:**
@@ -117,7 +117,7 @@ public class LinksDto
 
 ```csharp
 [HttpGet]
-public async Task<ActionResult<CollectionResponseDto<EmpresaDto>>> GetAll(
+public async Task<ActionResult<CollectionResponseDto<CompanyDto>>> GetAll(
     [FromQuery] int offset = 0,
     [FromQuery] int limit = 20,
     CancellationToken cancellationToken = default)
@@ -179,7 +179,7 @@ if (query.CompanyId > 0)
 
 **Correct:**
 ```csharp
-public async Task<EmpresaDto> GetByIdAsync(int id, CancellationToken cancellationToken)
+public async Task<CompanyDto> GetByIdAsync(int id, CancellationToken cancellationToken)
 {
     return await _repository.GetByIdAsync(id, cancellationToken);
 }
@@ -187,7 +187,7 @@ public async Task<EmpresaDto> GetByIdAsync(int id, CancellationToken cancellatio
 
 **Wrong:**
 ```csharp
-public async Task<EmpresaDto> GetById(int id)  // Missing Async suffix and CancellationToken
+public async Task<CompanyDto> GetById(int id)  // Missing Async suffix and CancellationToken
 ```
 
 ### 2.2 DTOs
@@ -200,13 +200,13 @@ public async Task<EmpresaDto> GetById(int id)  // Missing Async suffix and Cance
 /// <summary>
 /// Represents an employee in the system.
 /// </summary>
-public class FuncionarioDto
+public class EmployeeDto
 {
     /// <summary>
     /// The unique identifier of the employee.
     /// </summary>
-    [JsonPropertyName("funcionarioId")]
-    public int FuncionarioId { get; set; }
+    [JsonPropertyName("employeeId")]
+    public int EmployeeId { get; set; }
     
     /// <summary>
     /// The full name of the employee.
@@ -230,26 +230,26 @@ public class FuncionarioDto
 - NEVER call stored procedures — implement logic in C# with LINQ
 
 ```csharp
-public interface IFuncionarioRepository
+public interface IEmployeeRepository
 {
-    Task<Funcionario?> GetByIdAsync(int id, CancellationToken cancellationToken);
-    Task<IEnumerable<Funcionario>> GetAllAsync(FuncionarioQuery query, CancellationToken cancellationToken);
+    Task<Employee?> GetByIdAsync(int id, CancellationToken cancellationToken);
+    Task<IEnumerable<Employee>> GetAllAsync(EmployeeQuery query, CancellationToken cancellationToken);
 }
 
-public class FuncionarioRepository : IFuncionarioRepository
+public class EmployeeRepository : IEmployeeRepository
 {
     private readonly AppDbContext _context;
     
-    public FuncionarioRepository(AppDbContext context)
+    public EmployeeRepository(AppDbContext context)
     {
         _context = context;
     }
     
-    public async Task<IEnumerable<Funcionario>> GetAllAsync(
-        FuncionarioQuery query, 
+    public async Task<IEnumerable<Employee>> GetAllAsync(
+        EmployeeQuery query, 
         CancellationToken cancellationToken)
     {
-        var queryable = _context.Funcionarios.AsNoTracking();
+        var queryable = _context.Employees.AsNoTracking();
         
         if (query.CompanyId > 0)
             queryable = queryable.Where(f => f.CompanyId == query.CompanyId);
@@ -269,17 +269,17 @@ public class FuncionarioRepository : IFuncionarioRepository
 - Services contain business logic, call repositories
 
 ```csharp
-public interface IFuncionarioService
+public interface IEmployeeService
 {
-    Task<CollectionResponseDto<FuncionarioDto>> GetAllAsync(FuncionarioQuery query, CancellationToken cancellationToken);
-    Task<ItemResponseDto<FuncionarioDto>?> GetByIdAsync(int id, CancellationToken cancellationToken);
+    Task<CollectionResponseDto<EmployeeDto>> GetAllAsync(EmployeeQuery query, CancellationToken cancellationToken);
+    Task<ItemResponseDto<EmployeeDto>?> GetByIdAsync(int id, CancellationToken cancellationToken);
 }
 
-public class FuncionarioService : IFuncionarioService
+public class EmployeeService : IEmployeeService
 {
-    private readonly IFuncionarioRepository _repository;
+    private readonly IEmployeeRepository _repository;
     
-    public FuncionarioService(IFuncionarioRepository repository)
+    public EmployeeService(IEmployeeRepository repository)
     {
         _repository = repository;
     }
@@ -298,8 +298,8 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
-        services.AddScoped<IFuncionarioRepository, FuncionarioRepository>();
-        services.AddScoped<IFuncionarioService, FuncionarioService>();
+        services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+        services.AddScoped<IEmployeeService, EmployeeService>();
         return services;
     }
 }
@@ -316,11 +316,11 @@ public static class ServiceCollectionExtensions
 [Route("v1/[controller]")]
 [ApiController]
 [Produces("application/json")]
-public class FuncionariosController : ControllerBase
+public class EmployeesController : ControllerBase
 {
-    private readonly IFuncionarioService _service;
+    private readonly IEmployeeService _service;
     
-    public FuncionariosController(IFuncionarioService service)
+    public EmployeesController(IEmployeeService service)
     {
         _service = service;
     }
@@ -329,11 +329,11 @@ public class FuncionariosController : ControllerBase
     /// Retrieves all employees with optional filtering.
     /// </summary>
     [HttpGet]
-    [ProducesResponseType(typeof(CollectionResponseDto<FuncionarioDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(CollectionResponseDto<EmployeeDto>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponseDto), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ErrorResponseDto), StatusCodes.Status500InternalServerError)]
-    public async Task<ActionResult<CollectionResponseDto<FuncionarioDto>>> GetAll(
-        [FromQuery] FuncionarioQuery query,
+    public async Task<ActionResult<CollectionResponseDto<EmployeeDto>>> GetAll(
+        [FromQuery] EmployeeQuery query,
         CancellationToken cancellationToken)
     {
         var result = await _service.GetAllAsync(query, cancellationToken);
@@ -386,7 +386,7 @@ ALWAYS use `// Arrange`, `// Act`, `// Assert` comments:
 public async Task GetByIdAsync_WhenExists_ReturnsEmployee()
 {
     // Arrange
-    var employee = TestDataBuilders.CreateFuncionario(id: 1, name: "John Doe");
+    var employee = TestDataBuilders.CreateEmployee(id: 1, name: "John Doe");
     _mockRepository.Setup(r => r.GetByIdAsync(1, It.IsAny<CancellationToken>()))
         .ReturnsAsync(employee);
     
@@ -402,7 +402,7 @@ public async Task GetByIdAsync_WhenExists_ReturnsEmployee()
 ### 3.4 Use #region to Organize Tests
 
 ```csharp
-public class FuncionarioServiceTests
+public class EmployeeServiceTests
 {
     #region GetByIdAsync Tests
     
@@ -428,13 +428,13 @@ public class FuncionarioServiceTests
 ```csharp
 public static class TestDataBuilders
 {
-    public static Funcionario CreateFuncionario(
+    public static Employee CreateEmployee(
         int id = 1,
         string name = "Test Employee",
         int companyId = 1,
         bool active = true)
     {
-        return new Funcionario
+        return new Employee
         {
             Id = id,
             Name = name,
@@ -452,18 +452,18 @@ public static class TestDataBuilders
 - Implement `IDisposable` to clean up
 
 ```csharp
-public class FuncionarioRepositoryTests : IDisposable
+public class EmployeeRepositoryTests : IDisposable
 {
     private readonly AppDbContext _context;
-    private readonly FuncionarioRepository _repository;
+    private readonly EmployeeRepository _repository;
     
-    public FuncionarioRepositoryTests()
+    public EmployeeRepositoryTests()
     {
         var options = new DbContextOptionsBuilder<AppDbContext>()
             .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
             .Options;
         _context = new AppDbContext(options);
-        _repository = new FuncionarioRepository(_context);
+        _repository = new EmployeeRepository(_context);
     }
     
     public void Dispose() => _context.Dispose();
@@ -515,7 +515,7 @@ src/components/ComponentName/
 ```typescript
 // lib/types.ts
 export interface Employee {
-  funcionarioId: number;
+  employeeId: number;
   name: string;
   activeIndicator: boolean;
 }

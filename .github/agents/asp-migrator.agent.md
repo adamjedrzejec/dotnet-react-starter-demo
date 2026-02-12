@@ -624,7 +624,7 @@ After presenting results in chat, save the migration summary to `legacy/MIGRATIO
 ## Frontend Styling Reference
 
 ### Brand Colors
-- Header background: `bg-[#87adeb]` (MetLife blue)
+- Header background: `bg-[#87adeb]` (brand blue)
 - Content background: `bg-[#e0f1fa]` (light blue)
 - Header text: `text-white`
 - Body text: `text-gray-800`
@@ -641,7 +641,7 @@ After presenting results in chat, save the migration summary to `legacy/MIGRATIO
 - Empty state: `text-gray-500 italic p-4 text-center`
 
 ### Common Components
-- Loading: Spinner with "Carregando..." text
+- Loading: Spinner with "Loading..." text
 - Error: Red border box with error message and retry button
 - Filter form: Horizontal layout with label + input pairs
 - Pagination: offset/limit controls at bottom
@@ -650,7 +650,7 @@ After presenting results in chat, save the migration summary to `legacy/MIGRATIO
 
 ### API
 - Route: `v1/[controller]` — NO `/api/` prefix
-- Resource names: Portuguese, plural, lowercase
+- Resource names: plural, lowercase
 - Envelope: `ItemResponseDto<T>` / `CollectionResponseDto<T>`
 - Pagination: `offset` + `limit` (NOT `page`/`pageSize`)
 - Booleans: `Indicator` suffix (NEVER `is`/`has`)

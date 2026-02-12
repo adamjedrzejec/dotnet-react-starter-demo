@@ -9,7 +9,7 @@ Generate a new RESTful API endpoint with all required layers.
 
 ## Input Required
 
-- Resource name (Portuguese, e.g., "funcionarios", "empresas")
+- Resource name (e.g., "employees", "companies")
 - Entity properties with types
 - Required operations (GET all, GET by ID, POST, PUT, DELETE)
 
