@@ -1,6 +1,6 @@
 # dotnet-react-starter
 
-A minimal full-stack application template for demonstrating GitHub Copilot capabilities.
+A minimal full-stack application template for learning GitHub Copilot capabilities.
 
 > **📋 Note:** This is a **demo/starter template** designed to showcase how organizations can configure and leverage GitHub Copilot (instructions, prompts, skills, and agents) within a real-world project structure. The development standards, patterns, and configurations included here are **illustrative examples** — they do not represent any proprietary or organization-specific standards. Feel free to use this as a template and adapt the standards to your own team's needs.
 
@@ -9,6 +9,8 @@ A minimal full-stack application template for demonstrating GitHub Copilot capab
 - **Backend:** .NET 8 Web API with Entity Framework Core
 - **Frontend:** React 18 + TypeScript + Vite + Tailwind CSS
 - **Testing:** xUnit + Moq (backend)
+
+This template is a companion to the [GitHub Copilot Customization Workshop](https://copilot-academy.github.io/workshops/copilot-customization). Please refer to the workshop materials for detailed instructions on how to configure and use GitHub Copilot agents, prompts, and skills in the context of this project.
 
 ## Getting Started with Codespaces (Recommended)
 
@@ -93,6 +95,10 @@ See `.github/copilot-instructions.md` for complete development standards includi
 - C# coding standards (async/await, DTOs, repositories, services)
 - Testing standards (naming, AAA pattern, organization)
 - Frontend standards (TypeScript, Tailwind)
+
+## Recreating the Project
+
+To recreate this project from scratch, use a frontier model such as Opus 4.6 with GitHub Copilot in agent mode. Supply the prompt in docs/BUILD_INSTRUCTIONS.md to generate the project structure, code files, and configurations.
 
 ## License
 
