@@ -1,0 +1,23 @@
+{
+  "skill_name": "naming-checker",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Check my project for naming convention violations",
+      "expected_output": "A table of findings with severity levels and suggested fixes, or a clean bill of health if no violations exist",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Are my frontend file names following kebab-case conventions? I think some might be wrong.",
+      "expected_output": "Runs the file name checker script, reports any camelCase files that should be kebab-case, excluding test and agent files",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Scan the backend for any boolean properties using is/has prefix instead of Indicator suffix",
+      "expected_output": "Grep results showing boolean naming violations in C# files, presented in a table with severity and suggested renames",
+      "files": []
+    }
+  ]
+}
