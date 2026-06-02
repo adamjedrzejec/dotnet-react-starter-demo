@@ -1,0 +1,13 @@
+{
+  "eval_id": 2,
+  "eval_name": "notifications",
+  "prompt": "I need to plan the implementation of an in-app notification system. Notifications are created server-side when certain events happen (e.g. invoice overdue, new employee added). Users see a bell icon in the nav with an unread count badge, and can click to see a list. Mark-as-read is per notification. We have a React 18 frontend and .NET 8 backend.",
+  "assertions": [
+    "Output contains a Markdown table with columns for Task, Component, Size, Depends On, and Acceptance Criteria",
+    "At least one task explicitly covers creating a database migration or new notifications table",
+    "The risk assessment flags the database migration as a risk",
+    "At least one task covers a frontend bell icon, badge, or notification panel component",
+    "A mark-as-read endpoint or service method is represented as a distinct task",
+    "Total number of tasks in the table is 8 or more"
+  ]
+}

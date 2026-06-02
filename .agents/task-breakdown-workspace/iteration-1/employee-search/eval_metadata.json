@@ -1,0 +1,13 @@
+{
+  "eval_id": 1,
+  "eval_name": "employee-search",
+  "prompt": "Break down the implementation of an employee search feature. Users should be able to search employees by name, filter by department, and filter by active/inactive status. The API should support pagination. We're using .NET 8 Web API with EF Core and a React frontend.",
+  "assertions": [
+    "Output contains a Markdown table with columns for Task, Component, Size, Depends On, and Acceptance Criteria",
+    "At least one task covers a data/query layer change such as a repository filter or EF Core query update",
+    "At least one task covers a frontend search UI component",
+    "At least one task is sized M or larger",
+    "Output contains a risk assessment section",
+    "Output contains a summary section that mentions the critical path"
+  ]
+}

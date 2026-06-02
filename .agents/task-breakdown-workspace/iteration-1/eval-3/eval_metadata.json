@@ -1,0 +1,12 @@
+{
+  "eval_id": 3,
+  "eval_name": "csv-export",
+  "prompt": "What tasks are involved in adding a CSV export endpoint for the invoices list? The endpoint should accept the same filters as the GET /v1/invoices endpoint and return a downloadable CSV. No frontend changes needed for now — just the backend endpoint.",
+  "assertions": [
+    "Output contains a Markdown table with columns for Task, Component, Size, Depends On, and Acceptance Criteria",
+    "All tasks are labeled as Backend component (no frontend tasks, since the user specified backend-only)",
+    "No task involves a database migration or schema change",
+    "The total number of tasks in the table is 7 or fewer",
+    "The risk assessment section states no elevated risks or only minor risks (no flagged migration or shared-path warnings)"
+  ]
+}

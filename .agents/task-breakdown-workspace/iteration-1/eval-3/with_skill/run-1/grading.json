@@ -1,0 +1,30 @@
+{
+  "expectations": [
+    {
+      "text": "Output contains a Markdown table with columns for Task, Component, Size, Depends On, and Acceptance Criteria",
+      "passed": true,
+      "evidence": "Table header: '| # | Task | Component | Size | Depends On | Acceptance Criteria |' — all columns present with 11 rows"
+    },
+    {
+      "text": "All tasks are labeled as Backend component (no frontend tasks, since the user specified backend-only)",
+      "passed": true,
+      "evidence": "All 11 tasks are labeled Backend, Testing, or Backend/Testing — no Frontend tasks present"
+    },
+    {
+      "text": "No task involves a database migration or schema change",
+      "passed": false,
+      "evidence": "Task #2 creates AppDbContext with EF Core; the risk assessment explicitly flags a DB migration risk. The agent assumed greenfield when invoices likely already exist"
+    },
+    {
+      "text": "The total number of tasks in the table is 7 or fewer",
+      "passed": false,
+      "evidence": "11 tasks in the table — the agent assumed a fully greenfield codebase and scaffolded the entire invoices vertical slice"
+    },
+    {
+      "text": "The risk assessment section states no elevated risks or only minor risks (no flagged migration or shared-path warnings)",
+      "passed": false,
+      "evidence": "Risk assessment flags two elevated risks: DB migration (#2) and unbounded CSV export row count (#6)"
+    }
+  ],
+  "summary": { "passed": 2, "failed": 3, "total": 5, "pass_rate": 0.40 }
+}

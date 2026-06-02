@@ -1,0 +1,46 @@
+{
+  "skill_name": "task-breakdown",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Break down the implementation of an employee search feature. Users should be able to search employees by name, filter by department, and filter by active/inactive status. The API should support pagination. We're using .NET 8 Web API with EF Core and a React frontend.",
+      "expected_output": "A Markdown table with 6-10 tasks covering: DB query work, backend service/repository changes, API endpoint, frontend search UI, and tests. T-shirt sizes assigned. Risk assessment noting the shared repository code path. Summary with critical path.",
+      "files": [],
+      "assertions": [
+        "Output contains a Markdown table with columns for Task, Component, Size, Depends On, and Acceptance Criteria",
+        "At least one task covers a data/query layer change such as a repository filter or EF Core query update",
+        "At least one task covers a frontend search UI component",
+        "At least one task is sized M or larger",
+        "Output contains a risk assessment section",
+        "Output contains a summary section that mentions the critical path"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I need to plan the implementation of an in-app notification system. Notifications are created server-side when certain events happen (e.g. invoice overdue, new employee added). Users see a bell icon in the nav with an unread count badge, and can click to see a list. Mark-as-read is per notification. We have a React 18 frontend and .NET 8 backend.",
+      "expected_output": "A Markdown table with 8-14 tasks covering: notifications DB table (migration), backend entity/service/endpoint for creating and listing notifications, mark-as-read endpoint, frontend bell icon component, unread count polling or badge, and tests. Risk assessment flagging the DB migration and the shared nav/layout component change. Critical path identified in summary.",
+      "files": [],
+      "assertions": [
+        "Output contains a Markdown table with columns for Task, Component, Size, Depends On, and Acceptance Criteria",
+        "At least one task explicitly covers creating a database migration or new notifications table",
+        "The risk assessment flags the database migration as a risk",
+        "At least one task covers a frontend bell icon, badge, or notification panel component",
+        "A mark-as-read endpoint or service method is represented as a distinct task",
+        "Total number of tasks in the table is 8 or more"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "What tasks are involved in adding a CSV export endpoint for the invoices list? The endpoint should accept the same filters as the GET /v1/invoices endpoint and return a downloadable CSV. No frontend changes needed for now — just the backend endpoint.",
+      "expected_output": "A Markdown table with 4-7 tasks: service method for building CSV content, new controller endpoint, response content-type handling, tests. No DB migration needed. Risk section is minimal or states no elevated risk. Summary reflects it's a contained, backend-only feature.",
+      "files": [],
+      "assertions": [
+        "Output contains a Markdown table with columns for Task, Component, Size, Depends On, and Acceptance Criteria",
+        "All tasks are labeled as Backend component (no frontend tasks, since the user specified backend-only)",
+        "No task involves a database migration or schema change",
+        "The total number of tasks in the table is 7 or fewer",
+        "The risk assessment section states no elevated risks or only minor risks (no flagged migration or shared-path warnings)"
+      ]
+    }
+  ]
+}

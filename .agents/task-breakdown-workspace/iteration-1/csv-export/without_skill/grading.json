@@ -1,0 +1,30 @@
+{
+  "expectations": [
+    {
+      "text": "Output contains a Markdown table with columns for Task, Component, Size, Depends On, and Acceptance Criteria",
+      "passed": true,
+      "evidence": "Has a proper table: '| # | Task | Component | Size | Depends On | Acceptance Criteria |' with 11 rows matching the skill format exactly"
+    },
+    {
+      "text": "All tasks are labeled as Backend component (no frontend tasks, since the user specified backend-only)",
+      "passed": true,
+      "evidence": "All tasks labeled Backend, Testing, or Backend/Testing — no Frontend tasks"
+    },
+    {
+      "text": "No task involves a database migration or schema change",
+      "passed": false,
+      "evidence": "Task #2 creates AppDbContext and a migration (dotnet ef migrations add AddInvoices). Same greenfield assumption as with-skill run"
+    },
+    {
+      "text": "The total number of tasks in the table is 7 or fewer",
+      "passed": false,
+      "evidence": "11 tasks — same greenfield scope inflation as with-skill run"
+    },
+    {
+      "text": "The risk assessment section states no elevated risks or only minor risks (no flagged migration or shared-path warnings)",
+      "passed": false,
+      "evidence": "Risk assessment flags DB migration and unbounded export row count as elevated risks"
+    }
+  ],
+  "summary": { "passed": 2, "failed": 3, "total": 5, "pass_rate": 0.40 }
+}

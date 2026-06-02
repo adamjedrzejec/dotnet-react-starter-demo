@@ -1,0 +1,35 @@
+{
+  "expectations": [
+    {
+      "text": "Output contains a Markdown table with columns for Task, Component, Size, Depends On, and Acceptance Criteria",
+      "passed": true,
+      "evidence": "Table header is '| # | Task | Component | Size | Depends On | Acceptance Criteria |' — all required columns present"
+    },
+    {
+      "text": "At least one task covers a data/query layer change such as a repository filter or EF Core query update",
+      "passed": true,
+      "evidence": "Task #4: 'Update IEmployeeRepository and EmployeeRepository.GetAllAsync with LINQ filters: case-insensitive name contains, departmentId match, activeIndicator match'"
+    },
+    {
+      "text": "At least one task covers a frontend search UI component",
+      "passed": true,
+      "evidence": "Task #10 creates EmployeeSearch component with name text input, department dropdown, and active/inactive toggle; Task #11 wires it to the API"
+    },
+    {
+      "text": "At least one task is sized M or larger",
+      "passed": true,
+      "evidence": "Tasks #4, #5, #7, #8, #9, #10, #11 are all sized M"
+    },
+    {
+      "text": "Output contains a risk assessment section",
+      "passed": true,
+      "evidence": "'## ⚠️ Risk Assessment' section present with two risks: DB migration (#1) and shared code path on GetAllAsync (#4)"
+    },
+    {
+      "text": "Output contains a summary section that mentions the critical path",
+      "passed": true,
+      "evidence": "'## Summary' section: 'The critical path is #1 → #2 → #3 → #4 → #5 → #6'"
+    }
+  ],
+  "summary": { "passed": 6, "failed": 0, "total": 6, "pass_rate": 1.0 }
+}

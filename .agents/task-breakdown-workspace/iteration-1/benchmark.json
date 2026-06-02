@@ -1,0 +1,343 @@
+{
+  "metadata": {
+    "skill_name": "task-breakdown",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-06-02T10:39:33Z",
+    "evals_run": [
+      1,
+      2,
+      3
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 75.9,
+        "tokens": 64226,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Output contains a Markdown table with columns for Task, Component, Size, Depends On, and Acceptance Criteria",
+          "passed": true,
+          "evidence": "Table header is '| # | Task | Component | Size | Depends On | Acceptance Criteria |' \u2014 all required columns present"
+        },
+        {
+          "text": "At least one task covers a data/query layer change such as a repository filter or EF Core query update",
+          "passed": true,
+          "evidence": "Task #4: 'Update IEmployeeRepository and EmployeeRepository.GetAllAsync with LINQ filters: case-insensitive name contains, departmentId match, activeIndicator match'"
+        },
+        {
+          "text": "At least one task covers a frontend search UI component",
+          "passed": true,
+          "evidence": "Task #10 creates EmployeeSearch component with name text input, department dropdown, and active/inactive toggle; Task #11 wires it to the API"
+        },
+        {
+          "text": "At least one task is sized M or larger",
+          "passed": true,
+          "evidence": "Tasks #4, #5, #7, #8, #9, #10, #11 are all sized M"
+        },
+        {
+          "text": "Output contains a risk assessment section",
+          "passed": true,
+          "evidence": "'## \u26a0\ufe0f Risk Assessment' section present with two risks: DB migration (#1) and shared code path on GetAllAsync (#4)"
+        },
+        {
+          "text": "Output contains a summary section that mentions the critical path",
+          "passed": true,
+          "evidence": "'## Summary' section: 'The critical path is #1 \u2192 #2 \u2192 #3 \u2192 #4 \u2192 #5 \u2192 #6'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 86.8,
+        "tokens": 80462,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Output contains a Markdown table with columns for Task, Component, Size, Depends On, and Acceptance Criteria",
+          "passed": true,
+          "evidence": "Table header: '| # | Task | Component | Size | Depends On | Acceptance Criteria |' \u2014 all columns present with 13 rows"
+        },
+        {
+          "text": "At least one task explicitly covers creating a database migration or new notifications table",
+          "passed": true,
+          "evidence": "Task #1: 'Create Notification entity and EF Core migration with notificationId, userId, message, notificationType, readIndicator, and createdDate fields'"
+        },
+        {
+          "text": "The risk assessment flags the database migration as a risk",
+          "passed": true,
+          "evidence": "Risk Assessment Task #1: 'Risk type: Database migration \u2014 A schema change deployed to production without testing could fail mid-migration'"
+        },
+        {
+          "text": "At least one task covers a frontend bell icon, badge, or notification panel component",
+          "passed": true,
+          "evidence": "Task #11: 'Build NotificationBell component displaying a bell icon with an unread-count badge'"
+        },
+        {
+          "text": "A mark-as-read endpoint or service method is represented as a distinct task",
+          "passed": true,
+          "evidence": "Task #6: 'Add PATCH /v1/notifications/{id}/mark-read endpoint' \u2014 separate from the service task"
+        },
+        {
+          "text": "Total number of tasks in the table is 8 or more",
+          "passed": true,
+          "evidence": "13 tasks in the table (rows #1 through #13)"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.4,
+        "passed": 2,
+        "failed": 3,
+        "total": 5,
+        "time_seconds": 68.5,
+        "tokens": 65017,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Output contains a Markdown table with columns for Task, Component, Size, Depends On, and Acceptance Criteria",
+          "passed": true,
+          "evidence": "Table header: '| # | Task | Component | Size | Depends On | Acceptance Criteria |' \u2014 all columns present with 11 rows"
+        },
+        {
+          "text": "All tasks are labeled as Backend component (no frontend tasks, since the user specified backend-only)",
+          "passed": true,
+          "evidence": "All 11 tasks are labeled Backend, Testing, or Backend/Testing \u2014 no Frontend tasks present"
+        },
+        {
+          "text": "No task involves a database migration or schema change",
+          "passed": false,
+          "evidence": "Task #2 creates AppDbContext with EF Core; the risk assessment explicitly flags a DB migration risk. The agent assumed greenfield when invoices likely already exist"
+        },
+        {
+          "text": "The total number of tasks in the table is 7 or fewer",
+          "passed": false,
+          "evidence": "11 tasks in the table \u2014 the agent assumed a fully greenfield codebase and scaffolded the entire invoices vertical slice"
+        },
+        {
+          "text": "The risk assessment section states no elevated risks or only minor risks (no flagged migration or shared-path warnings)",
+          "passed": false,
+          "evidence": "Risk assessment flags two elevated risks: DB migration (#2) and unbounded CSV export row count (#6)"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.33,
+        "passed": 2,
+        "failed": 4,
+        "total": 6,
+        "time_seconds": 61.5,
+        "tokens": 45009,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Output contains a Markdown table with columns for Task, Component, Size, Depends On, and Acceptance Criteria",
+          "passed": false,
+          "evidence": "Output uses prose sections and sub-headings instead of a table. No T-shirt sizes, no 'Depends On' column, no 'Acceptance Criteria' column \u2014 very detailed but wrong format"
+        },
+        {
+          "text": "At least one task covers a data/query layer change such as a repository filter or EF Core query update",
+          "passed": true,
+          "evidence": "Section 3.1 describes GetAllAsync with LINQ filters for name, departmentId, and activeIndicator"
+        },
+        {
+          "text": "At least one task covers a frontend search UI component",
+          "passed": true,
+          "evidence": "Section 10 describes EmployeeSearchBar, EmployeeFilters, EmployeeTable, EmployeePagination, and EmployeeSearchPage components"
+        },
+        {
+          "text": "At least one task is sized M or larger",
+          "passed": false,
+          "evidence": "No T-shirt sizing present anywhere in the output \u2014 the format doesn't include size estimates"
+        },
+        {
+          "text": "Output contains a risk assessment section",
+          "passed": false,
+          "evidence": "No risk assessment section. Output includes 'Key Constraints' and 'Implementation Order' tables but no risks or mitigations"
+        },
+        {
+          "text": "Output contains a summary section that mentions the critical path",
+          "passed": false,
+          "evidence": "No summary with critical path. There is an 'Implementation Order' section listing steps but no explicit identification of the critical path or total effort estimate"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.67,
+        "passed": 4,
+        "failed": 2,
+        "total": 6,
+        "time_seconds": 73.5,
+        "tokens": 50804,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Output contains a Markdown table with columns for Task, Component, Size, Depends On, and Acceptance Criteria",
+          "passed": false,
+          "evidence": "Output uses prose sections (Phase 1\u20139). The final 'Task Summary Table' only has columns #, Phase, Deliverable, Owner \u2014 no Size, Depends On, or Acceptance Criteria"
+        },
+        {
+          "text": "At least one task explicitly covers creating a database migration or new notifications table",
+          "passed": true,
+          "evidence": "Phase 1, Section 1.2: 'EF Core Migration \u2014 Add DbSet<Notification> Notifications to AppDbContext, Generate migration: dotnet ef migrations add AddNotificationsTable'"
+        },
+        {
+          "text": "The risk assessment flags the database migration as a risk",
+          "passed": false,
+          "evidence": "No risk assessment section in the output. The output covers architecture decisions, phases, and a future enhancements table, but no risk/mitigation analysis"
+        },
+        {
+          "text": "At least one task covers a frontend bell icon, badge, or notification panel component",
+          "passed": true,
+          "evidence": "Phase 8.2 describes NotificationBell with bell icon, red badge with unread count, and toggle behavior"
+        },
+        {
+          "text": "A mark-as-read endpoint or service method is represented as a distinct task",
+          "passed": true,
+          "evidence": "Phase 4 controller table includes 'PATCH v1/notifications/{id}/read \u2014 Mark single notification as read' and 'PATCH v1/notifications/read-all'"
+        },
+        {
+          "text": "Total number of tasks in the table is 8 or more",
+          "passed": true,
+          "evidence": "Task Summary Table at the bottom has 13 rows (#1\u2013#13)"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.4,
+        "passed": 2,
+        "failed": 3,
+        "total": 5,
+        "time_seconds": 77.4,
+        "tokens": 52154,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Output contains a Markdown table with columns for Task, Component, Size, Depends On, and Acceptance Criteria",
+          "passed": true,
+          "evidence": "Has a proper table: '| # | Task | Component | Size | Depends On | Acceptance Criteria |' with 11 rows matching the skill format exactly"
+        },
+        {
+          "text": "All tasks are labeled as Backend component (no frontend tasks, since the user specified backend-only)",
+          "passed": true,
+          "evidence": "All tasks labeled Backend, Testing, or Backend/Testing \u2014 no Frontend tasks"
+        },
+        {
+          "text": "No task involves a database migration or schema change",
+          "passed": false,
+          "evidence": "Task #2 creates AppDbContext and a migration (dotnet ef migrations add AddInvoices). Same greenfield assumption as with-skill run"
+        },
+        {
+          "text": "The total number of tasks in the table is 7 or fewer",
+          "passed": false,
+          "evidence": "11 tasks \u2014 same greenfield scope inflation as with-skill run"
+        },
+        {
+          "text": "The risk assessment section states no elevated risks or only minor risks (no flagged migration or shared-path warnings)",
+          "passed": false,
+          "evidence": "Risk assessment flags DB migration and unbounded export row count as elevated risks"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 0.8,
+        "stddev": 0.3464,
+        "min": 0.4,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 77.0667,
+        "stddev": 9.2056,
+        "min": 68.5,
+        "max": 86.8
+      },
+      "tokens": {
+        "mean": 69901.6667,
+        "stddev": 9154.0647,
+        "min": 64226,
+        "max": 80462
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.4667,
+        "stddev": 0.1795,
+        "min": 0.33,
+        "max": 0.67
+      },
+      "time_seconds": {
+        "mean": 70.8,
+        "stddev": 8.2867,
+        "min": 61.5,
+        "max": 77.4
+      },
+      "tokens": {
+        "mean": 49322.3333,
+        "stddev": 3795.9529,
+        "min": 45009,
+        "max": 52154
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.33",
+      "time_seconds": "+6.3",
+      "tokens": "+20579"
+    }
+  },
+  "notes": []
+}

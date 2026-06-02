@@ -1,0 +1,35 @@
+{
+  "expectations": [
+    {
+      "text": "Output contains a Markdown table with columns for Task, Component, Size, Depends On, and Acceptance Criteria",
+      "passed": true,
+      "evidence": "Table header: '| # | Task | Component | Size | Depends On | Acceptance Criteria |' — all columns present with 13 rows"
+    },
+    {
+      "text": "At least one task explicitly covers creating a database migration or new notifications table",
+      "passed": true,
+      "evidence": "Task #1: 'Create Notification entity and EF Core migration with notificationId, userId, message, notificationType, readIndicator, and createdDate fields'"
+    },
+    {
+      "text": "The risk assessment flags the database migration as a risk",
+      "passed": true,
+      "evidence": "Risk Assessment Task #1: 'Risk type: Database migration — A schema change deployed to production without testing could fail mid-migration'"
+    },
+    {
+      "text": "At least one task covers a frontend bell icon, badge, or notification panel component",
+      "passed": true,
+      "evidence": "Task #11: 'Build NotificationBell component displaying a bell icon with an unread-count badge'"
+    },
+    {
+      "text": "A mark-as-read endpoint or service method is represented as a distinct task",
+      "passed": true,
+      "evidence": "Task #6: 'Add PATCH /v1/notifications/{id}/mark-read endpoint' — separate from the service task"
+    },
+    {
+      "text": "Total number of tasks in the table is 8 or more",
+      "passed": true,
+      "evidence": "13 tasks in the table (rows #1 through #13)"
+    }
+  ],
+  "summary": { "passed": 6, "failed": 0, "total": 6, "pass_rate": 1.0 }
+}

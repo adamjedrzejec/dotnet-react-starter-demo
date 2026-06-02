@@ -1,0 +1,35 @@
+{
+  "expectations": [
+    {
+      "text": "Output contains a Markdown table with columns for Task, Component, Size, Depends On, and Acceptance Criteria",
+      "passed": false,
+      "evidence": "Output uses prose sections (Phase 1–9). The final 'Task Summary Table' only has columns #, Phase, Deliverable, Owner — no Size, Depends On, or Acceptance Criteria"
+    },
+    {
+      "text": "At least one task explicitly covers creating a database migration or new notifications table",
+      "passed": true,
+      "evidence": "Phase 1, Section 1.2: 'EF Core Migration — Add DbSet<Notification> Notifications to AppDbContext, Generate migration: dotnet ef migrations add AddNotificationsTable'"
+    },
+    {
+      "text": "The risk assessment flags the database migration as a risk",
+      "passed": false,
+      "evidence": "No risk assessment section in the output. The output covers architecture decisions, phases, and a future enhancements table, but no risk/mitigation analysis"
+    },
+    {
+      "text": "At least one task covers a frontend bell icon, badge, or notification panel component",
+      "passed": true,
+      "evidence": "Phase 8.2 describes NotificationBell with bell icon, red badge with unread count, and toggle behavior"
+    },
+    {
+      "text": "A mark-as-read endpoint or service method is represented as a distinct task",
+      "passed": true,
+      "evidence": "Phase 4 controller table includes 'PATCH v1/notifications/{id}/read — Mark single notification as read' and 'PATCH v1/notifications/read-all'"
+    },
+    {
+      "text": "Total number of tasks in the table is 8 or more",
+      "passed": true,
+      "evidence": "Task Summary Table at the bottom has 13 rows (#1–#13)"
+    }
+  ],
+  "summary": { "passed": 4, "failed": 2, "total": 6, "pass_rate": 0.67 }
+}

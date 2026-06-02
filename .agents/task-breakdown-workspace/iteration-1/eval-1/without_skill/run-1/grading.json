@@ -1,0 +1,35 @@
+{
+  "expectations": [
+    {
+      "text": "Output contains a Markdown table with columns for Task, Component, Size, Depends On, and Acceptance Criteria",
+      "passed": false,
+      "evidence": "Output uses prose sections and sub-headings instead of a table. No T-shirt sizes, no 'Depends On' column, no 'Acceptance Criteria' column — very detailed but wrong format"
+    },
+    {
+      "text": "At least one task covers a data/query layer change such as a repository filter or EF Core query update",
+      "passed": true,
+      "evidence": "Section 3.1 describes GetAllAsync with LINQ filters for name, departmentId, and activeIndicator"
+    },
+    {
+      "text": "At least one task covers a frontend search UI component",
+      "passed": true,
+      "evidence": "Section 10 describes EmployeeSearchBar, EmployeeFilters, EmployeeTable, EmployeePagination, and EmployeeSearchPage components"
+    },
+    {
+      "text": "At least one task is sized M or larger",
+      "passed": false,
+      "evidence": "No T-shirt sizing present anywhere in the output — the format doesn't include size estimates"
+    },
+    {
+      "text": "Output contains a risk assessment section",
+      "passed": false,
+      "evidence": "No risk assessment section. Output includes 'Key Constraints' and 'Implementation Order' tables but no risks or mitigations"
+    },
+    {
+      "text": "Output contains a summary section that mentions the critical path",
+      "passed": false,
+      "evidence": "No summary with critical path. There is an 'Implementation Order' section listing steps but no explicit identification of the critical path or total effort estimate"
+    }
+  ],
+  "summary": { "passed": 2, "failed": 4, "total": 6, "pass_rate": 0.33 }
+}
