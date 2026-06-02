@@ -34,7 +34,7 @@ public class UserPreferencesController : ControllerBase
     [ProducesResponseType(typeof(ItemResponseDto<UserPreferenceDto>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponseDto), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ErrorResponseDto), StatusCodes.Status500InternalServerError)]
-    public async Task<ActionResult<ItemResponseDto<UserPreferenceDto>>> GetByUserId(
+    public async Task<ActionResult<ItemResponseDto<UserPreferenceDto>>> GetByUserIdAsync(
         int userId,
         CancellationToken cancellationToken)
     {
@@ -64,7 +64,7 @@ public class UserPreferencesController : ControllerBase
     [ProducesResponseType(typeof(ItemResponseDto<UserPreferenceDto>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponseDto), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ErrorResponseDto), StatusCodes.Status500InternalServerError)]
-    public async Task<ActionResult<ItemResponseDto<UserPreferenceDto>>> Update(
+    public async Task<ActionResult<ItemResponseDto<UserPreferenceDto>>> UpdateAsync(
         int userId,
         [FromBody] UpdateUserPreferenceRequestDto request,
         CancellationToken cancellationToken)
