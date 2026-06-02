@@ -52,6 +52,13 @@ applicationBuilder.Services.AddCors(corsOptions =>
 
 var webApplication = applicationBuilder.Build();
 
+// Ensure InMemory database is created with seed data
+using (var startupScope = webApplication.Services.CreateScope())
+{
+    var dbContext = startupScope.ServiceProvider.GetRequiredService<Api.Data.AppDbContext>();
+    dbContext.Database.EnsureCreated();
+}
+
 // Enable Swagger in development
 if (webApplication.Environment.IsDevelopment())
 {

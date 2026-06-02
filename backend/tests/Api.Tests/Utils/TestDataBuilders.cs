@@ -64,4 +64,32 @@ public static class TestDataBuilders
             Prev = prevUrl
         };
     }
+
+    /// <summary>
+    /// Creates a sample user preference entity for testing.
+    /// </summary>
+    /// <param name="userPreferenceId">Preference record ID (default: 1).</param>
+    /// <param name="userId">Owning user ID (default: 1).</param>
+    /// <param name="theme">Display theme (default: "light").</param>
+    /// <param name="emailNotification">Email notifications enabled (default: true).</param>
+    /// <param name="pushNotification">Push notifications enabled (default: true).</param>
+    /// <returns>A configured UserPreference entity.</returns>
+    public static Api.Models.UserPreference BuildUserPreference(
+        int userPreferenceId = 1,
+        int userId = 1,
+        string theme = "light",
+        bool emailNotification = true,
+        bool pushNotification = true)
+    {
+        return new Api.Models.UserPreference
+        {
+            UserPreferenceId = userPreferenceId,
+            UserId = userId,
+            ThemePreference = theme,
+            EmailNotificationIndicator = emailNotification,
+            PushNotificationIndicator = pushNotification,
+            CreatedDate = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+            UpdatedDate = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+        };
+    }
 }

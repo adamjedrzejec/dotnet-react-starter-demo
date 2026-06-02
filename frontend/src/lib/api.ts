@@ -3,6 +3,12 @@
  * Handles request/response formatting and error handling.
  */
 
+import type {
+  SingleItemEnvelope,
+  UserPreference,
+  UpdateUserPreferenceRequest,
+} from './types';
+
 const BACKEND_SERVICE_URL = import.meta.env.VITE_API_BASE_URL || '';
 
 /**
@@ -53,4 +59,34 @@ export async function executeApiRequest<TResponse>(
 
   const parsedResponseData = await httpResponse.json();
   return parsedResponseData as TResponse;
+}
+
+/**
+ * Retrieves user preferences for the specified user.
+ * @param userId - The user's unique identifier
+ */
+export function getUserPreferences(
+  userId: number
+): Promise<SingleItemEnvelope<UserPreference>> {
+  return executeApiRequest<SingleItemEnvelope<UserPreference>>(
+    `/v1/userpreferences/${userId}`
+  );
+}
+
+/**
+ * Updates user preferences for the specified user (upsert).
+ * @param userId - The user's unique identifier
+ * @param data - The preference values to save
+ */
+export function updateUserPreferences(
+  userId: number,
+  data: UpdateUserPreferenceRequest
+): Promise<SingleItemEnvelope<UserPreference>> {
+  return executeApiRequest<SingleItemEnvelope<UserPreference>>(
+    `/v1/userpreferences/${userId}`,
+    {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    }
+  );
 }

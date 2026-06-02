@@ -48,3 +48,21 @@ export interface ApiErrorResponse {
     message: string;
   }>;
 }
+
+/** User display and notification preferences */
+export interface UserPreference {
+  userPreferenceId: number;
+  userId: number;
+  themePreference: string;
+  emailNotificationIndicator: boolean;
+  pushNotificationIndicator: boolean;
+  createdDate: string;
+  updatedDate: string;
+}
+
+/** Request body for updating user preferences */
+export interface UpdateUserPreferenceRequest {
+  themePreference: string;
+  emailNotificationIndicator: boolean;
+  pushNotificationIndicator: boolean;
+}

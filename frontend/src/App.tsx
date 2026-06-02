@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { SystemHealthPage } from './routes/health/HealthPage';
+import { UserPreferencesPage } from './routes/preferences';
 
 /**
  * Main application shell with routing and navigation.
@@ -30,6 +31,14 @@ export function ApplicationShell() {
                   System Health
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/preferences"
+                  className="text-white hover:text-blue-100 transition-colors"
+                >
+                  Preferences
+                </Link>
+              </li>
             </ul>
           </nav>
         </header>
@@ -38,6 +47,7 @@ export function ApplicationShell() {
           <Routes>
             <Route path="/" element={<WelcomeLanding />} />
             <Route path="/health" element={<SystemHealthPage />} />
+            <Route path="/preferences" element={<UserPreferencesPage />} />
           </Routes>
         </main>
 
